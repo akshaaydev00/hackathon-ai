@@ -20,13 +20,14 @@ const sendData = (user) => {
          access_token: access_token,
          name: user.personal_details.name,
          email: user.personal_details.email,
+         profile_img : user.personal_details.profile_img,
          studentid: user.personal_details.studentid,
      }
  }
 
  
 export const Signup = async (req, res) =>{
-     const { name, email, password } = req.body;
+     const { name, email, password, college, grade } = req.body;
      try {
           if (!email) {
                return res.status(403).json({"error" : "Please provide an email"});
@@ -34,8 +35,17 @@ export const Signup = async (req, res) =>{
           if (!password || !passwordRegex.test(password)) {
                return res.status(403).json({ "error": "Password should contain at least 1 capital letter, 1 special character, and 1 number" });
            }
+
+           if (!college) {
+            return res.status(403).json({ "error": "Please provide a college"});
+           }
    
-          
+
+           if (!grade) {
+            return res.status(403).json({ "error":"Provide the correct grade " });
+           }
+
+
            if (name.length < 3) {
                return res.status(403).json({ "error": "Name should be at least 3 characters long" });
            }
@@ -62,7 +72,9 @@ export const Signup = async (req, res) =>{
                 email,
                 studentid: username,
                 password: hash
-            }
+            },
+            college,
+            class : grade
         });
 
         let user = await newUser.save();
@@ -105,4 +117,31 @@ export const Signin = (req, res) =>{
                  console.log(error);
                  res.status(500).json({ "error": error.message })
              })
+ }
+
+
+ export const googleAuth = async (req, res) => {
+    let { access_token, fullname, email, profile_img } = req.body;
+    let getUser = await Students.findOne({ "personal_info.email": email })
+
+    if (!getUser) {
+        let studentid = await generateUsername(email)
+        let user = new Students({
+            personal_info: { name : fullname, email, studentid, profile_img },
+            google_auth: true,
+        })
+
+        user.save()
+            .then((data) => {
+                return res.status(200).json(sendData(data))
+            })
+            .catch((err) => {
+                return res.status(403).json({ "error": "There is an error signing in with google! Please try again later.." })
+            })
+    }
+    else {
+
+        return res.status(200).json(sendData(getUser))
+
+    }
  }

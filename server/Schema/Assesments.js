@@ -12,18 +12,18 @@ const assesmentschema = mongoose.Schema({
      },
 
      title : {
-        type : [],
+        type : String,
      },
 
      type : {
         type : String,
      },
 
-     questions : {
+     questionid : {
         type : [],
      }
 
 
 });
 
-export default mongoose.model('performance', performaceschema);
+export default mongoose.model('assements', assesmentschema);
