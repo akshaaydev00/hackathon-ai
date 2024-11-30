@@ -13,6 +13,7 @@ const questionschema = mongoose.Schema({
 
      text : {
         type : String,
+        required : true
      },
 
      options : {

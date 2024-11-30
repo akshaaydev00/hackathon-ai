@@ -4,15 +4,14 @@ export default {
     theme: {
         
         colors: {
+            'white': '#FFFFFF',
             'black': '#242424',
-            'white':'#ffffff',
             'grey': '#F3F3F3',
             'dark-grey': '#6B6B6B',
-            'bg' : '#ffffff',
-            'primary' : '#8685EF',
-            'text' : '#FAF8FF',
-            'secondary' : '#E3E0F3',
-            
+            'red': '#FF4E4E',
+            'transparent': 'transparent',
+            'twitter': '#1DA1F2',
+            'purple': '#8B46FF'
         },
 
         fontSize: {
@@ -28,27 +27,8 @@ export default {
         extend: {
             fontFamily: {
               inter: ["'Inter'", "sans-serif"],
-              gelasio: ["'Gelasio'", "serif"],
-              header: ['Niramit']
+              gelasio: ["'Gelasio'", "serif"]
             },
-            boxShadow : {
-                '3xl': '0 35px 60px -15px rgba(0, 0, 0, 0.3)',
-            },
-            keyframes : {
-                display_item : {
-                    '0%' :{opacity : '0'},
-                    '10%' :{opacity : '10'},
-                    '20%' :{opacity : '20'},
-                    '30%' :{opacity : '30'},
-                    '40%' :{opacity : '40'},
-                    '50%' :{opacity : '50'},
-                    '60%' :{opacity : '60'},
-                    '70%' :{opacity : '70'},
-                    '80%' :{opacity : '80'},
-                    '90%' :{opacity : '90'},
-                    '100%' :{opacity : '100'},
-                }
-            }
         },
 
     },

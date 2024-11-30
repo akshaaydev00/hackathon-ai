@@ -27,4 +27,4 @@ const lessonschema = mongoose.Schema({
 
 });
 
-export default mongoose.model('performance', performaceschema);
+export default mongoose.model('lessons', lessonschema);
